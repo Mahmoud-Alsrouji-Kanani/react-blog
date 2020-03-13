@@ -7,7 +7,7 @@ const AddCommentForm = ({ articleName, setArticleInfo }) => {
     const addComment = async () => {
         const result = await fetch(`/api/articles/${articleName}/add-comment`, {
             method: 'post',
-            body: JSON.stringify({ username, text: commentText }),
+            body: JSON.stringify({ username, text: commentText }), //turns this json object into a string that the server can parse
             headers: {
                 'Content-Type': 'application/json',
             }
