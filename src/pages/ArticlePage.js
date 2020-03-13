@@ -11,8 +11,14 @@ const ArticlePage = ({ match }) => {
 
     // the function that we pass to *useEffect* will get called whenever this component is loaded
     // useEffect hook runs not only when the component first mounts, but also whenever the component updates (in our case, if articleInfo changes)
-    useEffect(() => {
-        setArticleInfo({ upvotes: Math.ceil(Math.random() * 10) });
+    useEffect(() => { // useEffect does not allow us to use async
+        const fetchData = async () => {
+            const result = await fetch(`/api/articles/${name}`);
+            const body = await result.json();
+            //console.log(body);
+            setArticleInfo(body);
+        }
+        fetchData();
     }, [name]);
 
     if (!article) return <NotFoundPage />
